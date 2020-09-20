@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>JavaGui</title>
-    <link rel="icon" type="image/x-icon" href="IMG/javis.png" />
+    <title>AWSguide</title>
+    <link rel="icon" type="image/x-icon" href="IMG/awsIcon.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -33,7 +33,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">Configuracion <span
                             class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Git-Github.html">Spring</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="instancias.html">Instancias</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="logicas.html">Logicas</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="uml.html">UML</a></li>
 
@@ -48,7 +48,7 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                <h2 class="my-4">UML
+                <h2 class="my-4">Instancias
 
                 </h2>
 
@@ -62,64 +62,99 @@
                 <div class="card mb-4">
 
                     <div class="card-body">
-                        <h3 class="card-title">Diagrama </h3>
+                        <h3 class="card-title">EC2 </h3>
 
-                        <p class="card-text">
-                            Para realizar el diagrama, un alternativa es emplear la página <a
-                                href="https://plantuml.com/es/" target="blank"><b>PlantUML</b></a>, en la opción de
-                            /<b>Online Server</b>/ nos abre una ventana para introducir código con el cual construir el
-                            diagrama<br>
-                            Este código va entre, una etiqueta de inicio y de final: <b>@startuml</b> y <b>@enduml</b>,
-                            consiste en primero declarar las clases, con la palabra reservada <b>class</b>, el
-                            <b>nombre</b>, llaves <b>{}</b>, y dentro de las llaves, declaramos los <b>métodos()</b> y
-                            <b>variables</b>.<br>
-                            Posteriormente indicamos la relación entre las clases con los nombres anteriormente
-                            utilizados, <b>guiones</b> y signo de <b>mayorQue</b>.
+                        <p class="card-text">Cuando creamos una instancia, esta va a tener asociada un conjunto de
+                            claves llamadas <b>pares de claves</b> o <b>key pair</b>, ese key-pair se debe guardar
+                            porque va a ser la forma principal de autenticar en las instancias y solo se usa para ella.
+                            Llegamos allí mediante: <b>servicios/EC2/pares de claves(Red y seguridad)/crear par de
+                                llaves.</b><br>
+                            Tener presente que el tablero de <b>EC2</b> nos muestra todos los recursos en uso de nuestra
+                            cuenta
+                            AWS<br>
+                            Cuando coloquemos el nombre, es adecuado colocar el nombre de la región, porque cada
+                            Key-pair está asociado a una región concreta, escogemos <b>.pem</b>, y le damos a crear.
+                            cuando es creada nos genera un archivo que debemos guardar.
+
+
                         </p>
 
                         <p class="card-text"></p>
-                        <img class="card-img-top" src="IMG/UML/um1.png" alt="Card image cap">
+                        <img class="card-img-top" src="IMG/INSTANCIAS/ec1.png" alt="Card image cap">
                         <p></p>
 
-                        <p class="card-text">Dentro de las clases las variables se declaran como: tipo de dato y nombre,
-                            mientras los métodos con el nombre seguido de paréntesis</p>
-                        <pre class="pre">
-                            class VistaTransecto{
-                                TextView longitud, latitud
-                                onCreate()
-                                conectarExtras()
-                                putValueTextView(double latitude, double longitude)
-                                stop()
-                                conectarSQLite()
-                                hilo()
-                                onBackPressed()
-                                }
-                        </pre>
-
-
+                        <p class="card-text">Ya con el par de claves, debemos crear o utilizar el grupo de seguridad
+                            (segurity group), que trae por defecto. Este contiene las reglas de firewall que van a estar
+                            asociadas a un recurso de AWS</p>
                         <p></p>
-                        <p class="card-text">Tenemos tres tipos de relaciones entre las clases:<br>
-                            <b>Composición</b>: la clase que lleva el diamante lleno, no funciona sin la clase del otro
-                            extremo, como ejemplo: computador-cpu, se indica cómo <b>--*</b><br>
-                            <b>Agregación</b>: la clase que lleva el diamante vacío, tiene la del otro lado, pero no
-                            depende de ella, puede funcionar sin esa, se indica como <b>--o</b><br>
-                            <b>Extensión</b>: cuando hereda, se indica como <b>--|></b>
+                        <img class="card-img-top" src="IMG/INSTANCIAS/ec2.png" alt="Card image cap">
+                        <p></p>
+                        <p class="card-text">O podemos crear uno, en: <b>EC2/segurity groups(Red y seguridad) / crea
+                                grupo de seguridad </b>; en la ventana que nos abre, colocamos nombre al grupo,
+                            iniciando con la palabra “seg”, para identificarlo, colocamos descripción en donde indicamos
+                            para que es, en <b>VPC</b>, colocamos en que red, ahora mismo solo tenemos una por defecto,
+                            así que la dejamos.<br>
+                            Para las reglas tenemos inbound(reglas de entrada) y outbound(reglas de salida), pero por lo
+                            pronto se puede dejar en blanco
+
                         </p>
-                        <pre>
-Iniciar-->VistaTransecto
-Iniciar--*Service_Location
-VistaTransecto*--Service_Location
-Service_Location--mapFragment
-mapFragment*--VistaTransecto
-VistaTransecto--ConexionSQLite
-UtilidadesSQLite--ConexionSQLite
-                            </pre>
+                        <img class="card-img-top" src="IMG/INSTANCIAS/ec3.png" alt="Card image cap">
+                        <p></p>
+                        <img class="card-img-top" src="IMG/INSTANCIAS/ec4.png" alt="Card image cap">
 
-                        <img class="card-img-top" src="IMG/UML/um2.png" alt="Card image cap">
+                        <p></p>
+                        <p class="card-text">Antes de lanzar la Instancia, primero debemos entrar a las imágenes
+                            disponibles AMI /Awned by me/public images/,
+                        </p>
+                        <img class="card-img-top" src="IMG/INSTANCIAS/ec5.png" alt="Card image cap">
+                        <p></p>
+                        <p class="card-text">Ahora si vamos a lanzar la instancia: instancia/ lanzar instancia/;
+                            señalamos (para mi caso) free tier, que son las imágenes gratuitas, para este ejemplo
+                            seleccionamos Ubuntu server 20.04 LTS.., la cual indica que es freetier, y nos envía a la
+                            página de tipos, en donde por defecto ya está escogido el que es freetier, pero es de
+                            realatar que aca se escoge los recursos del equipo, en donde se ven variedad de CPUs y
+                            memorias, y con base en eso la diferencia en precios.
+
+                            <img class="card-img-top" src="IMG/INSTANCIAS/ec6.png" alt="Card image cap">
+                            <p></p>
+                            <img class="card-img-top" src="IMG/INSTANCIAS/ec7.png" alt="Card image cap">
+
+                            <p></p>
+                            <p class="card-text">Luego nos manda a una ventana en donde se resume toda la información de
+                                la instancia, pero para modificar cualquier característica, podemos escoger de las
+                                pestañas ubicadas en la parte superior, en 3.configure instance, seleccionamos Protect
+                                againt accidental termination.
+
+                                <img class="card-img-top" src="IMG/INSTANCIAS/ec8.png" alt="Card image cap">
+                                <p></p>
+                                <img class="card-img-top" src="IMG/INSTANCIAS/ec9.png" alt="Card image cap">
+                                <p></p>
+                                <p class="card-text">En las pestañas, seleccionamos segurity grupos existente, o
+                                    podríamos crearlo desde allí.
+
+                                    <img class="card-img-top" src="IMG/INSTANCIAS/ec10.png" alt="Card image cap">
+                                    <p></p>
+
+                                    <p class="card-text">Ahora si le damos a lanzar, primero nos muestra la ventana de
+                                        resumen de información, denuevo indicamos lanzar y nos abre una ventana en donde
+                                        nos indica la key pair, revisamos que sea la requerida y indicamos Launch
+                                        instances
+
+                                        <img class="card-img-top" src="IMG/INSTANCIAS/ec11.png" alt="Card image cap">
+
+                                        <p></p>
+
+                                        <p class="card-text">Ahora nos muestra una ventana de confirmación, en donde
+                                            tenemos un botón en la parte inferior derecha donde podemos ver la
+                                            instancia, si entramos a ver intancia ya la podemos ver en nuestro tablero
+
+                                            <img class="card-img-top" src="IMG/INSTANCIAS/ec12.png" alt="Card image cap">
+                                            <p></p>
+                                            <img class="card-img-top" src="IMG/INSTANCIAS/ec13.png" alt="Card image cap">
 
                     </div>
                     <div class="card-footer text-muted">
-                        Publicado en Septiembre 16, 2020 by
+                        Publicado en Septiembre 20, 2020 by
                         <a href="#">Armando Pinzon</a>
                     </div>
                 </div>
